@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/15 20:26:37 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:52:15 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@
 # define PIPE_ERROR_MESSAGE		"Pipe error"
 # define MALLOC_ERROR_MESSAGE	"Memory allocation error"
 # define FORK_ERROR_MESSAGE		"Child process creation error"
-# define EXECVE_ERROR_MESSAGE	"Command execution error"
+# define EXECVE_ERROR_MESSAGE	"EXCVE execution error"
 
 
 # define PIPE_ERROR -1
 # define OPEN_ERROR -1
 # define FORK_ERROR -1
-# define N0_ACCESS	-1
+# define ACCESS		0
 
 
 # define RD_END	0
 # define WR_END	1
 # define SPACE	' '
 # define DOTS	':'
+# define SLASH	"/"
 # define PATH	"PATH="
 
 

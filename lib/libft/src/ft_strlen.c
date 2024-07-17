@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aolabarr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:00:48 by aolabarr          #+#    #+#             */
-/*   Updated: 2023/12/19 16:10:17 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:12:53 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ size_t	ft_strlen(const char *str)
 	size_t	count;
 
 	count = 0;
-	while (*str != '\0')
+	while (str[count] != '\0')
 	{
 		count++;
-		str++;
 	}
 	return (count);
 }

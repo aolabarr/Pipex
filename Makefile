@@ -6,9 +6,11 @@
 #    By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/15 19:33:44 by aolabarr         ###   ########.fr        #
+#    Updated: 2024/07/17 20:24:01 by aolabarr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+
 
 NAME = pipex
 NO_LINK = -c
@@ -32,6 +34,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 all: lib $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS)
+	rm -f outfile.txt
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

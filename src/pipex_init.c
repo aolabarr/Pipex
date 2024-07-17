@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/15 20:28:55 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:31:38 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_files	open_files(char *filename_1, char *filename_2)
 		perror(OPEN_ERROR_MESSAGE);
 		exit(EXIT_FAILURE);
 	}
-	fd.out = open(filename_2, O_WRONLY);
+	fd.out = open(filename_2, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd.out == OPEN_ERROR)
 	{
 		perror(OPEN_ERROR_MESSAGE);
