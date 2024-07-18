@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:39:29 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/17 20:17:45 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/18 10:54:09 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(int ac, char **av, char **env)
 	if (ac < 5)
 		return(ft_putstr_fd(INPUT_ERROR_MESSAGE, STDOUT_FILENO), EXIT_FAILURE);
 	init_data(ac, av, env, &data);
-	/*
+	
 	// PRINT INFO
-	write(1, "\nXXXX\n", 6);
-	printf("\nMAIN INFO\n%d: %s\n%d: %s\n", data.fd.in, av[1], data.fd.out, av[ac - 1]);
+	ft_printf("\nMAIN INFO\n%d: %s\n%d: %s\n", data.fd.in, av[1], data.fd.out, av[ac - 1]);
+	/*
 	int i  = -1;
 	size_t j = 0;
 	while (++i < ac - 3)

@@ -1,3 +1,7 @@
+
+MAIN INFO
+3: infile.txt
+4: outfile.txt
 Childs:	2
 /usr/bin/ls
 fork()

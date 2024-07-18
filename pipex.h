@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/17 20:52:15 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/18 10:49:39 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 
 # include "lib/libft/src/libft.h"
+# include "lib/libio/libio.h"
  
 # define OPEN_ERROR_MESSAGE     "Open error"
 # define INPUT_ERROR_MESSAGE  	"Not enougth arguments\n"
@@ -42,7 +43,6 @@
 # define DOTS	':'
 # define SLASH	"/"
 # define PATH	"PATH="
-
 
 
 
