@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/17 20:31:38 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:33:18 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	init_data(int ac, char **av, char **env, t_data *data)
 		perror(MALLOC_ERROR_MESSAGE);
 		exit(EXIT_FAILURE);
 	}
-	file_redirections(data);
-	data->cmds = handle_arguments(data->childs, av);
 	data->paths = get_paths(env);
+	data->cmds = handle_arguments(data->childs, av);
 	data->pipes = create_pipes(ac);
+	file_redirections(data);
 	data->env = env;
 }
 
@@ -68,19 +68,20 @@ int **create_pipes(int ac)
 	int 	**pipes;
 
 	i = 0;
-	pipes = ft_malloc_mat(ac - 3, 2, sizeof(int));
+	pipes = ft_malloc_mat(ac - 3 - 1, 2, sizeof(int));
 	if (!pipes)
 	{
 		perror(MALLOC_ERROR_MESSAGE);
 		exit(EXIT_FAILURE);
 	}
-	while (i < ac - 3)
+	while (i < ac - 3 - 1)
 	{
 		if (pipe(pipes[i]) == PIPE_ERROR)
 		{
 			perror(PIPE_ERROR_MESSAGE);
 			exit(EXIT_FAILURE);
 		}
+		//ft_printf("(%d, %d)\t\n", pipes[i][RD_END], pipes[i][WR_END]);
 		i++;
 	}
 	return (pipes);

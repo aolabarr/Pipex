@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/18 10:49:39 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:59:44 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	**get_paths(char **env);
 void	init_execution(t_data *data);
 char	*get_path(char **paths, char *cmd);
 void	exe_child(t_data *data, char *pathname, int child);
+void	close_pipes(int **pipes, int childs);
 
 
 //UTILS
