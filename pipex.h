@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/18 15:59:44 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/18 20:40:12 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	close_pipes(int **pipes, int childs);
 
 //UTILS
 int		**ft_malloc_mat(int x, int y, int size);
-void	ft_free_mat(int **mat, int size);
+void	ft_free_mat_int(int **mat, int size);
+void	free_all(t_data *data);
 
 #endif

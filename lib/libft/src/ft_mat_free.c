@@ -16,10 +16,13 @@ void	ft_mat_free(char **mat, size_t size)
 {
 	while (size)
 	{
-		free(mat[size]);
+		if (mat[size])
+			free(mat[size]);
 		size--;
 	}
-	free(mat[0]);
-	free(mat);
+	if (mat[0])
+		free(mat[0]);
+	if (mat)
+		free(mat);
 	return ;
 }

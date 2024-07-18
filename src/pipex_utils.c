@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:30:19 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/15 14:34:00 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/18 20:40:55 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	**ft_malloc_mat(int x, int y, int size)
 	{
 		map[i] = malloc(size * y);
 		if (!map[i])
-			return (ft_free_mat(map, i), NULL);
+			return (ft_free_mat_int(map, i), NULL);
 		i++;
 	}
 	return (map);
 }
-void	ft_free_mat(int **mat, int size)
+void	ft_free_mat_int(int **mat, int size)
 {
 	int	i;
 
