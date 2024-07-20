@@ -6,7 +6,7 @@
 #    By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/18 11:11:18 by aolabarr         ###   ########.fr        #
+#    Updated: 2024/07/20 13:18:57 by aolabarr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC =	pipex_main.c \
 		pipex_utils.c \
 		pipex_exe.c \
 		pipex_init.c \
+		pipex_init_2.c \
+		print.c \
 				
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))

@@ -6,13 +6,13 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:30:19 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/18 20:40:55 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:32:27 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	**ft_malloc_mat(int x, int y, int size)
+int	**ft_malloc_mat_int(int x, int y, int size)
 {
 	int	**map;
 	int	i;
@@ -43,3 +43,25 @@ void	ft_free_mat_int(int **mat, int size)
 	mat = NULL;
 	return ;
 }
+void	free_all(t_data *data)
+{
+	int	i;
+
+	free(data->pid);
+	ft_free_mat_int(data->pipes, data->childs - 1);
+	i = 0;
+	while (i < data->childs)
+	{
+		ft_free_mat_str(data->cmds[i], ft_matsize(data->cmds[i]));
+		i++;
+	}
+	free(data->cmds);
+	ft_free_mat_str(data->all_paths, ft_matsize(data->all_paths));
+	ft_free_mat_str(data->paths, ft_matsize(data->paths));
+	data->pid = NULL;
+	data->pipes = NULL;
+	data->cmds = NULL;
+	data->all_paths = NULL;
+	data->paths = NULL;
+}
+

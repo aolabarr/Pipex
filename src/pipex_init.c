@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/18 15:33:18 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:06:33 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,11 @@
 void	init_data(int ac, char **av, char **env, t_data *data)
 {
 	data->childs = ac - 3;
-	data->fd = open_files(av[1], av[ac - 1]);
-	data->pid = malloc((sizeof(pid_t) * data->childs));
-	if (!data->pid)
-	{
-		perror(MALLOC_ERROR_MESSAGE);
-		exit(EXIT_FAILURE);
-	}
-	data->paths = get_paths(env);
+	memory_allocation(data);
+	data->all_paths = get_all_paths(env);
 	data->cmds = handle_arguments(data->childs, av);
-	data->pipes = create_pipes(ac);
+	data->pipes = create_pipes(data->childs);
+	data->fd = open_files(av[1], av[ac - 1]);
 	file_redirections(data);
 	data->env = env;
 }
@@ -62,31 +57,30 @@ char ***handle_arguments(int childs, char **av)
 	return (args);
 }
 
-int **create_pipes(int ac)
+int **create_pipes(int childs)
 {
 	int		i;
 	int 	**pipes;
 
 	i = 0;
-	pipes = ft_malloc_mat(ac - 3 - 1, 2, sizeof(int));
+	pipes = ft_malloc_mat_int(childs - 1, 2, sizeof(int));
 	if (!pipes)
 	{
 		perror(MALLOC_ERROR_MESSAGE);
 		exit(EXIT_FAILURE);
 	}
-	while (i < ac - 3 - 1)
+	while (i < childs - 1)
 	{
 		if (pipe(pipes[i]) == PIPE_ERROR)
 		{
 			perror(PIPE_ERROR_MESSAGE);
 			exit(EXIT_FAILURE);
 		}
-		//ft_printf("(%d, %d)\t\n", pipes[i][RD_END], pipes[i][WR_END]);
 		i++;
 	}
 	return (pipes);
 }
-char	**get_paths(char **env)
+char	**get_all_paths(char **env)
 {
 	size_t	i;
 	int		get;

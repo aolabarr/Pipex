@@ -12,8 +12,10 @@
 
 #include "libft.h"
 
-void	ft_mat_free(char **mat, size_t size)
+void	ft_free_mat_str(char **mat, size_t size)
 {
+	if (!mat)
+		return ;
 	while (size)
 	{
 		if (mat[size])
@@ -22,7 +24,6 @@ void	ft_mat_free(char **mat, size_t size)
 	}
 	if (mat[0])
 		free(mat[0]);
-	if (mat)
-		free(mat);
+	free(mat);
 	return ;
 }
