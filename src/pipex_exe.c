@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:10:51 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/20 13:52:51 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/20 21:17:28 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,36 @@ void	init_execution(t_data *data)
 	char	*pathname;
 
 	i  = 0;
+	ft_printf("Childs: %d\n", data->childs);
 	while (i < data->childs)
 	{
 		pathname = get_path(data->all_paths, data->cmds[i][0]);
+		write(1, "\n", 1); write(1, pathname, ft_strlen(pathname)); write(1, "\n", 1);
 		data->pid[i] = fork();
+		write(1, "Prueba A\n", 9);
 		if (data->pid[i] == FORK_ERROR)
 		{
 			perror(FORK_ERROR_MESSAGE); 
 			exit(EXIT_FAILURE); // Liberar algo???
 		}
 		else if (data->pid[i] == 0)
+		{
+			write(1, "Prueba B\n", 9);
 			exe_child(data, pathname, i);
+		}
+		else
+		{
+			if (i == 0)
+			{
+				write(1, "Prueba C\n", 9);
+				write_here_doc(data);
+			}
+		}	
 		data->paths[i] = pathname;
 		i++;
-		
 	}
-	close_pipes(data->pipes, data->childs);
+	close_pipes(data);
+	//sleep(3);
 	wait_childs(data);
 	return ;	
 }
@@ -63,26 +77,27 @@ char	*get_path(char **all_paths, char *cmd)
 
 void	exe_child(t_data *data, char *pathname, int child)
 {
-	
 	//print_child(data, pathname, child); //PRINT
 	if (child != 0) // todos menos el primero proceso
 		dup2(data->pipes[child - 1][RD_END], STDIN_FILENO);
 	if (child != data->childs - 1) // todos menos el ultimo proceso
 		dup2(data->pipes[child][WR_END], STDOUT_FILENO);
-	close_pipes(data->pipes, data->childs);
+	close_pipes(data);
 	execve(pathname,  data->cmds[child], data->env);
 	perror(EXECVE_ERROR_MESSAGE);
 	exit(EXIT_FAILURE);
 }
-void	close_pipes(int **pipes, int childs)
+void	close_pipes(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while(i < childs - 1)
+	if (data->hdoc == 1)
+		i++;
+	while(i < data->childs - 1)
 	{
-		close(pipes[i][RD_END]);
-		close(pipes[i][WR_END]);
+		close(data->pipes[i][RD_END]);
+		close(data->pipes[i][WR_END]);
 		i++;
 	}
 	return ;
@@ -102,6 +117,16 @@ void	wait_childs(t_data *data)
 		}
 		i++;
 	}
+}
+void	write_here_doc(t_data *data)
+{
+	if (data->hdoc == 1)
+	{
+		close(data->pipes[0][RD_END]);
+		write(data->pipes[0][WR_END], data->here_doc, ft_strlen(data->here_doc));
+		close(data->pipes[0][WR_END]);
+	}
+	return ;
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/20 14:06:33 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/20 21:05:31 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,31 @@
 
 void	init_data(int ac, char **av, char **env, t_data *data)
 {
-	data->childs = ac - 3;
-	memory_allocation(data);
+	if (data->hdoc == 0)
+		data->childs = ac - 3;
+	else if (data->hdoc == 1)
+		data->childs = ac - 4;
+	memory_allocation(data, av);
 	data->all_paths = get_all_paths(env);
-	data->cmds = handle_arguments(data->childs, av);
+	data->cmds = handle_arguments(data->childs, av, data->hdoc);
 	data->pipes = create_pipes(data->childs);
-	data->fd = open_files(av[1], av[ac - 1]);
+	data->fd = open_files(av[1], av[ac - 1], data->hdoc);
 	file_redirections(data);
 	data->env = env;
 }
 
-t_files	open_files(char *filename_1, char *filename_2)
+t_files	open_files(char *filename_1, char *filename_2, int hdoc)
 {
 	t_files	fd;
 
-	fd.in = open(filename_1, O_RDONLY);
-	if (fd.in == OPEN_ERROR)
+	if (hdoc == 0)
 	{
-		perror(OPEN_ERROR_MESSAGE);
-		exit(EXIT_FAILURE);
+		fd.in = open(filename_1, O_RDONLY);
+		if (fd.in == OPEN_ERROR)
+		{
+			perror(OPEN_ERROR_MESSAGE);
+			exit(EXIT_FAILURE);
+		}
 	}
 	fd.out = open(filename_2, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd.out == OPEN_ERROR)
@@ -42,7 +48,7 @@ t_files	open_files(char *filename_1, char *filename_2)
 	}
 	return (fd);
 }
-char ***handle_arguments(int childs, char **av)
+char ***handle_arguments(int childs, char **av, int hdoc)
 {
 	char 	***args;
 	int		i;
@@ -51,7 +57,10 @@ char ***handle_arguments(int childs, char **av)
 	i = 0;
 	while (i < childs)
 	{
-		args[i] = ft_split(av[i + 2], SPACE);
+		if (hdoc == 0)
+			args[i] = ft_split(av[i + 2], SPACE);
+		else if(hdoc == 1)
+			args[i] = ft_split(av[i + 3], SPACE);
 		i++;
 	}
 	return (args);

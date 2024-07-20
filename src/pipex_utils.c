@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:30:19 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/20 14:32:27 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:40:09 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,20 @@ void	free_all(t_data *data)
 	free(data->cmds);
 	ft_free_mat_str(data->all_paths, ft_matsize(data->all_paths));
 	ft_free_mat_str(data->paths, ft_matsize(data->paths));
+	ft_free(data->limiter);
+	ft_free(data->here_doc);
 	data->pid = NULL;
 	data->pipes = NULL;
 	data->cmds = NULL;
 	data->all_paths = NULL;
 	data->paths = NULL;
+	data->limiter = NULL;
+	data->here_doc = NULL;
+}
+void	ft_free(char *str)
+{
+	if (str)
+		free(str);
+	return ;
 }
 
