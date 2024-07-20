@@ -6,7 +6,7 @@
 #    By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/20 13:18:57 by aolabarr         ###   ########.fr        #
+#    Updated: 2024/07/20 14:40:44 by aolabarr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,10 @@ $(OBJ_DIR):
 
 sanitizer: lib $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(SFLAGS) $(OBJS) $(LD_FLAGS) -o $(NAME)
+
+bonus: lib $(OBJ_DIR) $(OBJS)
+	rm -f outfile.txt
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 lib:
 	make -C $(LIBFT_DIR)
