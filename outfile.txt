@@ -1,13 +1,1 @@
-Childs: 2
-
-/usr/bin/ls
-Prueba A
-Prueba C
-
-/usr/bin/wc
-Prueba A
-Prueba B
-Prueba A
-Prueba A
-Prueba B
-11
+12

@@ -1,6 +1,6 @@
 
 
-#include "pipex.h"
+#include "inc/pipex_bonus.h"
 
 void    print(int control, t_data *data, int ac, char **av, char **env)
 {

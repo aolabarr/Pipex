@@ -3,21 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/20 14:40:44 by aolabarr         ###   ########.fr        #
+#    Updated: 2024/07/21 23:52:09 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
+NAME_BONUS = pipex_bonus
 
 NO_LINK = -c
 CFLAGS = -Wall -Wextra -Werror -g3
 SFLAGS =  -fsanitize=address
 
-OBJ_DIR = ./obj
 SRC_DIR = ./src
+OBJ_DIR = ./obj
+SRC_BONUS_DIR = ./src_bonus
+OBJ_BONUS_DIR = ./obj_bonus
 
 INC_DIR = .
 LIBFT_DIR = ./lib/libft
@@ -28,11 +31,19 @@ SRC =	pipex_main.c \
 		pipex_utils.c \
 		pipex_exe.c \
 		pipex_init.c \
-		pipex_init_2.c \
-		print.c \
+
+
+SRC_BONUS =	pipex_main_bonus.c \
+			pipex_utils_bonus.c \
+			pipex_exe_bonus.c \
+			pipex_init_bonus.c \
+			pipex_init_2_bonus.c \
+			pipex_error_bonus.c \
+			print.c \
 				
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+OBJS_BONUS = $(addprefix $(OBJ_BONUS_DIR)/,$(SRC_BONUS:.c=.o))
 
 all: lib $(OBJ_DIR) $(NAME)
 
@@ -46,12 +57,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 
-sanitizer: lib $(OBJ_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(SFLAGS) $(OBJS) $(LD_FLAGS) -o $(NAME)
-
-bonus: lib $(OBJ_DIR) $(OBJS)
+bonus: lib $(OBJ_BONUS_DIR) $(OBJS_BONUS)
 	rm -f outfile.txt
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME_BONUS)
+
+$(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
+	$(CC) $(NO_LINK) $(CFLAGS) -I$(INC_DIR) $< -o $@
+
+$(OBJ_BONUS_DIR):
+	mkdir $(OBJ_BONUS_DIR)
 
 lib:
 	make -C $(LIBFT_DIR)
@@ -64,6 +78,7 @@ fclean: clean
 
 clean:
 	@if [ -d $(OBJ_DIR) ]; then rm -rf $(OBJ_DIR); fi
+	@if [ -d $(OBJ_BONUS_DIR) ]; then rm -rf $(OBJ_BONUS_DIR); fi
 	make clean -C $(LIBFT_DIR)
 
 re: fclean all

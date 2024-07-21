@@ -1,49 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_init_2.c                                     :+:      :+:    :+:   */
+/*   pipex_init_2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:11:56 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/20 20:39:20 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/21 22:44:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "inc/pipex_bonus.h"
 
 void	memory_allocation(t_data *data, char **av)
 {
 	data->pid = malloc(sizeof(pid_t) * data->childs);
 	if (!data->pid)
-	{
-		perror(MALLOC_ERROR_MESSAGE);
-		exit(EXIT_FAILURE);
-	}
+		handle_error(data, MALLOC);
 	data->paths = malloc(sizeof(char *) * (data->childs + 1));
-	data->paths[data->childs] = NULL;
 	if (!data->paths)
-	{
-		perror(MALLOC_ERROR_MESSAGE);
-		exit(EXIT_FAILURE);
-	}
+		handle_error(data, MALLOC);
+	data->paths[data->childs] = NULL;
 	if (data->hdoc == 1)
 		data->limiter = ft_strdup(av[2]);
 	else
-	{
 		data->limiter = NULL;
-		data->here_doc = NULL;
-	}
 	return ;
 }
 
 void	file_redirections(t_data *data)
 {
-	if (data->hdoc == 0)
-	{
-		dup2(data->fd.in, STDIN_FILENO);
-		close(data->fd.in);
-	}
+	dup2(data->fd.in, STDIN_FILENO);
+	close(data->fd.in);
 	dup2(data->fd.out, STDOUT_FILENO);
 	close(data->fd.out);
 }
+
+void	read_stdin(t_data *data)
+{
+	char	*buffer;
+	char	*limit;
+
+	limit = data->limiter;
+	buffer = ft_strdup("");
+	if (!buffer)
+		handle_error(data, MALLOC);
+	while (buffer)
+	{
+		if(buffer)
+			ft_free(buffer);
+		buffer = get_next_line(STDIN_FILENO);
+		write(1, buffer, ft_strlen(buffer)); write(1, "Prueba A\n", 9);
+		if (!buffer)
+			break;
+		write(data->fd.in, buffer, ft_strlen(buffer));
+		if (!ft_strncmp(buffer, limit, ft_strlen(limit))
+				|| ft_strlen(buffer) == ft_strlen(limit) + 1)
+			break;
+	}
+	return ;
+}
+

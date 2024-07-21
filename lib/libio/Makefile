@@ -32,7 +32,7 @@ GNL_SRC =	get_next_line.c \
 PF_OBJ_DIR = ./ftprintf/obj
 PF_OBJ = $(PF_OBJ_DIR)/*.o
 
-OBJ = $(addprefix $(OBJ_DIR)/,$(GNL_SRC:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR)/, $(GNL_SRC:.c=.o))
 
 all: $(NAME)
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:30:19 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 23:59:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/21 22:44:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/pipex.h"
+#include "inc/pipex_bonus.h"
 
 int	**ft_malloc_mat_int(int x, int y, int size)
 {
@@ -30,7 +30,6 @@ int	**ft_malloc_mat_int(int x, int y, int size)
 	}
 	return (map);
 }
-
 void	ft_free_mat_int(int **mat, int size)
 {
 	int	i;
@@ -44,43 +43,43 @@ void	ft_free_mat_int(int **mat, int size)
 	mat = NULL;
 	return ;
 }
-
 void	free_all(t_data *data)
 {
 	if (!data->pid)
 		free(data->pid);
 	ft_free_mat_int(data->pipes, data->childs - 1);
-	ft_free_mat3_str(data->cmds, data->childs);
+	free_commands(data->cmds, data->childs);
 	ft_free_mat_str(data->all_paths, ft_matsize(data->all_paths));
 	ft_free_mat_str(data->paths, ft_matsize(data->paths));
+	ft_free(data->limiter);
 	data->pid = NULL;
 	data->pipes = NULL;
 	data->cmds = NULL;
 	data->all_paths = NULL;
 	data->paths = NULL;
+	data->limiter = NULL;
 	return ;
 }
-
 void	ft_free(char *str)
 {
 	if (str)
 		free(str);
 	return ;
 }
-
-void	ft_free_mat3_str(char ***mat, size_t size)
+void	free_commands(char ***cmds, int size)
 {
-	size_t	i;
+	int i;
 
-	if (!mat)
+	if (!cmds)
 		return ;
 	i = 0;
 	while (i < size)
 	{
-		ft_free_mat_str(mat[i], ft_matsize(mat[i]));
+		ft_free_mat_str(cmds[i], ft_matsize(cmds[i]));
 		i++;
 	}
-	free(mat);
-	mat = NULL;
+	free(cmds);
+	cmds = NULL;
 	return ;
 }
+
