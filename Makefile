@@ -6,12 +6,11 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/21 23:52:09 by marvin           ###   ########.fr        #
+#    Updated: 2024/07/22 00:11:08 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-NAME_BONUS = pipex_bonus
 
 NO_LINK = -c
 CFLAGS = -Wall -Wextra -Werror -g3
@@ -59,7 +58,7 @@ $(OBJ_DIR):
 
 bonus: lib $(OBJ_BONUS_DIR) $(OBJS_BONUS)
 	rm -f outfile.txt
-	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME)
 
 $(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
 	$(CC) $(NO_LINK) $(CFLAGS) -I$(INC_DIR) $< -o $@
