@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:30:19 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 23:59:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/22 01:19:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_free_mat_int(int **mat, int size)
 
 void	free_all(t_data *data)
 {
-	if (!data->pid)
+	if (data->pid)
 		free(data->pid);
 	ft_free_mat_int(data->pipes, data->childs - 1);
 	ft_free_mat3_str(data->cmds, data->childs);

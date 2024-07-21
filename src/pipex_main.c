@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:39:29 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 23:58:36 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/22 01:52:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	handle_error(t_data *data, int type)
 		perror(EXECVE_ERROR_MESSAGE);
 	else if (type == PIPE)
 		perror(PIPE_ERROR_MESSAGE);
+	else if (type == CMD)
+		perror(CMD_ERROR_MESSAGE);
 	free_all(data);
 	exit(EXIT_FAILURE);
 	return ;
@@ -47,13 +49,17 @@ void	handle_error(t_data *data, int type)
 
 void	memory_allocation(t_data *data)
 {
+	int	i;
+
 	data->pid = malloc(sizeof(pid_t) * data->childs);
 	if (!data->pid)
 		handle_error(data, MALLOC);
 	data->paths = malloc(sizeof(char *) * (data->childs + 1));
 	if (!data->paths)
 		handle_error(data, MALLOC);
-	data->paths[data->childs] = NULL;
+	i = 0;
+	while (i <= data->childs)
+		data->paths[i++] = NULL;
 	return ;
 }
 

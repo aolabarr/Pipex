@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:10:51 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 23:53:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/22 01:13:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	init_execution(t_data *data)
 	while (i < data->childs)
 	{
 		pathname = get_path(data->all_paths, data->cmds[i][0]);
+		if (!pathname)
+			handle_error(data, CMD);
 		data->pid[i] = fork();
 		if (data->pid[i] == ERROR)
 			handle_error(data, FORK);
@@ -92,8 +94,12 @@ void	wait_childs(t_data *data)
 	while (i < data->childs)
 	{
 		if (waitpid(data->pid[i], &(status[i]), 0) == ERROR)
+		{
+			free(status);
 			handle_error(data, WAIT);
+		}
 		i++;
 	}
+	free(status);
 	return ;
 }

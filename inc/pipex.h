@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 23:40:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/22 01:35:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define EXECVE_ERROR_MESSAGE	"EXCVE execution error"
 # define WAIT_ERROR_MESSAGE		"Wait error"
 # define UNLINK_ERROR_MESSAGE	"Unlink error"
+# define CMD_ERROR_MESSAGE		"Command no found"
 
 # define INPUT	1
 # define MALLOC	2
@@ -39,7 +40,8 @@
 # define FORK	5
 # define EXECVE	6
 # define WAIT	7
-# define UNLINK	8
+# define CMD	8
+
 # define ERROR	-1
 # define ACCESS	0
 
@@ -50,7 +52,24 @@
 # define DOTS		':'
 # define SLASH		"/"
 # define PATH		"PATH="
-# define HERE_DOC	"here_doc"
+
+// Errores comunes del bash
+#define EXIT_FILE_NOT_FOUND 1
+#define EXIT_INVALID_ARGUMENT 2
+#define EXIT_PERMISSION_DENIED 13
+#define EXIT_CANNOT_EXECUTE 126
+#define COMMAND_NOT_FOUND 127
+
+#define EXIT_OUT_OF_MEMORY 12 // Memoria insuficiente
+#define EXIT_IO_ERROR 5       // Error de entrada/salida
+#define EXIT_DEVICE_NOT_FOUND 6 // Dispositivo no encontrado
+#define EXIT_TIMEOUT 124       // Tiempo de espera agotado
+#define EXIT_CONFLICT 409      // Conflicto de recursos
+#define EXIT_UNAVAILABLE 503   // Servicio no disponible
+#define EXIT_UNSUPPORTED 415   // Operación no soportada
+#define EXIT_DATA_CORRUPTION 74 // Corrupción de datos
+#define EXIT_AUTH_FAILURE 401  // Fallo de autenticación
+#define EXIT_NETWORK_FAILURE 104 // Fallo de red
 
 typedef struct	s_files
 {

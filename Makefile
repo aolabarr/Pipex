@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/22 00:11:08 by marvin           ###   ########.fr        #
+#    Updated: 2024/07/22 00:16:08 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRC =	pipex_main.c \
 		pipex_exe.c \
 		pipex_init.c \
 
-
 SRC_BONUS =	pipex_main_bonus.c \
 			pipex_utils_bonus.c \
 			pipex_exe_bonus.c \
@@ -40,7 +39,6 @@ SRC_BONUS =	pipex_main_bonus.c \
 			pipex_error_bonus.c \
 			print.c \
 				
-
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 OBJS_BONUS = $(addprefix $(OBJ_BONUS_DIR)/,$(SRC_BONUS:.c=.o))
 

@@ -16,13 +16,10 @@ size_t	ft_matsize(char **str)
 {
 	size_t	count;
 
+	count = 0;
 	if (!str)
 		return (0);
-	count = 0;
-	while (*str != NULL)
-	{
+	while (str[count] != NULL)
 		count++;
-		str++;
-	}
 	return (count);
 }
