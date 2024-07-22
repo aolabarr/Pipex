@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_init_2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:11:56 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 22:44:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 00:37:16 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/pipex_bonus.h"
+#include <stdio.h>
 
 void	memory_allocation(t_data *data, char **av)
 {
@@ -34,30 +35,44 @@ void	file_redirections(t_data *data)
 	close(data->fd.in);
 	dup2(data->fd.out, STDOUT_FILENO);
 	close(data->fd.out);
+	return ;
 }
 
 void	read_stdin(t_data *data)
 {
 	char	*buffer;
 	char	*limit;
+	int		fd;
 
-	limit = data->limiter;
+	fd = create_temp_file(data);
+	limit = ft_strjoin(data->limiter, "\n");
 	buffer = ft_strdup("");
 	if (!buffer)
 		handle_error(data, MALLOC);
 	while (buffer)
 	{
-		if(buffer)
+		if (buffer)
 			ft_free(buffer);
 		buffer = get_next_line(STDIN_FILENO);
-		write(1, buffer, ft_strlen(buffer)); write(1, "Prueba A\n", 9);
-		if (!buffer)
-			break;
-		write(data->fd.in, buffer, ft_strlen(buffer));
-		if (!ft_strncmp(buffer, limit, ft_strlen(limit))
-				|| ft_strlen(buffer) == ft_strlen(limit) + 1)
-			break;
+		if (is_identical_str(buffer, limit))
+		{
+			ft_free(limit);
+			ft_free(buffer);
+			break ;
+		}
+		if (buffer)
+			write(fd, buffer, ft_strlen(buffer));
 	}
+	close(fd);
 	return ;
 }
 
+int	create_temp_file(t_data *data)
+{
+	int	fd;
+
+	fd = open(HERE_DOC, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (fd == ERROR)
+		handle_error(data, OPEN);
+	return (fd);
+}

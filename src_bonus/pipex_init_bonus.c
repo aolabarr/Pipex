@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_init_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 22:44:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 00:26:31 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	init_data(int ac, char **av, char **env, t_data *data)
 	memory_allocation(data, av);
 	data->all_paths = get_all_paths(env);
 	data->cmds = handle_arguments(data, av);
-	data->pipes = create_pipes(data->childs);
-	data->fd = open_files(av[1], av[ac - 1], data);
+	data->pipes = create_pipes(data);
 	if (data->hdoc == 1)
 		read_stdin(data);
+	data->fd = open_files(av[1], av[ac - 1], data);
 	file_redirections(data);
 	data->env = env;
 }
@@ -36,7 +36,7 @@ t_files	open_files(char *filename_1, char *filename_2, t_data *data)
 	if (data->hdoc == 0)
 		fd.in = open(filename_1, O_RDONLY);
 	else if (data->hdoc == 1)
-		fd.in = open(HERE_DOC, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		fd.in = open(HERE_DOC, O_RDONLY);
 	if (fd.in == ERROR)
 		handle_error(data, OPEN);
 	fd.out = open(filename_2, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -44,11 +44,11 @@ t_files	open_files(char *filename_1, char *filename_2, t_data *data)
 		handle_error(data, OPEN);
 	return (fd);
 }
-char ***handle_arguments(t_data *data, char **av)
-{
-	char 	***args;
-	int		i;
 
+char	***handle_arguments(t_data *data, char **av)
+{
+	char	***args;
+	int		i;
 
 	args = malloc(sizeof(char *) * data->childs);
 	if (!args)
@@ -58,40 +58,36 @@ char ***handle_arguments(t_data *data, char **av)
 	{
 		if (data->hdoc == 0)
 			args[i] = ft_split(av[i + 2], SPACE);
-		else if(data->hdoc == 1)
+		else if (data->hdoc == 1)
 			args[i] = ft_split(av[i + 3], SPACE);
-		i++;
-		if(!args[i]) //TODO
+		if (!args[i])
 		{
-			
+			ft_free_mat3_str(args, i);
+			handle_error(data, MALLOC);
 		}
+		i++;
 	}
 	return (args);
 }
 
-int **create_pipes(int childs)
+int	**create_pipes(t_data *data)
 {
 	int		i;
-	int 	**pipes;
+	int		**pipes;
 
 	i = 0;
-	pipes = ft_malloc_mat_int(childs - 1, 2, sizeof(int));
+	pipes = ft_malloc_mat_int(data->childs - 1, 2, sizeof(int));
 	if (!pipes)
-	{
-		perror(MALLOC_ERROR_MESSAGE);
-		exit(EXIT_FAILURE);
-	}
-	while (i < childs - 1)
+		handle_error(data, MALLOC);
+	while (i < data->childs - 1)
 	{
 		if (pipe(pipes[i]) == ERROR)
-		{
-			perror(PIPE_ERROR_MESSAGE);
-			exit(EXIT_FAILURE);
-		}
+			handle_error(data, PIPE);
 		i++;
 	}
 	return (pipes);
 }
+
 char	**get_all_paths(char **env)
 {
 	size_t	i;
@@ -100,14 +96,14 @@ char	**get_all_paths(char **env)
 
 	i = 0;
 	get = 0;
-	while(i < ft_matsize(env) && get == 0)
+	while (i < ft_matsize(env) && get == 0)
 	{
 		if (!ft_strncmp(env[i], PATH, ft_strlen(PATH)))
 		{
 			paths = ft_split(env[i] + ft_strlen(PATH), DOTS);
 			get = 1;
-		}	
+		}
 		i++;
 	}
-	return(paths);
+	return (paths);
 }

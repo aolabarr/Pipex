@@ -3,44 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_exe_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:10:51 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 22:44:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 00:24:07 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/pipex_bonus.h"
-
-void    print_child(t_data *data, char *pathname, int child);
 
 void	init_execution(t_data *data)
 {
 	int		i;
 	char	*pathname;
 
-	i  = 0;
-	//ft_printf("Childs: %d\n", data->childs);
+	i = 0;
 	while (i < data->childs)
 	{
 		pathname = get_path(data->all_paths, data->cmds[i][0]);
-		//write(1, "\n", 1); write(1, pathname, ft_strlen(pathname)); write(1, "\n", 1);
 		data->pid[i] = fork();
-		//write(1, "Prueba A\n", 9);
 		if (data->pid[i] == ERROR)
 			handle_error(data, FORK);
 		else if (data->pid[i] == 0)
-		{
-			//write(1, "Prueba B\n", 9);
 			exe_child(data, pathname, i);
-		}
 		data->paths[i] = pathname;
 		i++;
 	}
 	close_pipes(data);
-	//sleep(3);
 	wait_childs(data);
-	return ;	
+	return ;
 }
 
 char	*get_path(char **all_paths, char *cmd)
@@ -56,7 +47,7 @@ char	*get_path(char **all_paths, char *cmd)
 		pathname = ft_strjoin_freed(pathname, SLASH);
 		pathname = ft_strjoin_freed(pathname, cmd);
 		if (access(pathname, X_OK) == ACCESS)
-			break;
+			break ;
 		free(pathname);
 		pathname = NULL;
 		i++;
@@ -66,23 +57,21 @@ char	*get_path(char **all_paths, char *cmd)
 
 void	exe_child(t_data *data, char *pathname, int child)
 {
-	//print_child(data, pathname, child); //PRINT
-	if (child != 0) // todos menos el primero proceso
+	if (child != 0)
 		dup2(data->pipes[child - 1][RD_END], STDIN_FILENO);
-	if (child != data->childs - 1) // todos menos el ultimo proceso
+	if (child != data->childs - 1)
 		dup2(data->pipes[child][WR_END], STDOUT_FILENO);
 	close_pipes(data);
-	execve(pathname,  data->cmds[child], data->env);
+	execve(pathname, data->cmds[child], data->env);
 	handle_error(data, EXECVE);
 }
+
 void	close_pipes(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	if (data->hdoc == 1)
-		i++;
-	while(i < data->childs - 1)
+	while (i < data->childs - 1)
 	{
 		close(data->pipes[i][RD_END]);
 		close(data->pipes[i][WR_END]);
@@ -90,21 +79,25 @@ void	close_pipes(t_data *data)
 	}
 	return ;
 }
+
 void	wait_childs(t_data *data)
 {
 	int	i;
-	int	status[data->childs];
+	int	*status;
 
+	status = malloc(sizeof(int) * data->childs);
+	if (!status)
+		handle_error(data, MALLOC);
 	i = 0;
 	while (i < data->childs)
 	{
 		if (waitpid(data->pid[i], &(status[i]), 0) == ERROR)
+		{
+			free(status);
 			handle_error(data, WAIT);
+		}
 		i++;
 	}
+	free(status);
 	return ;
 }
-
-
-
-

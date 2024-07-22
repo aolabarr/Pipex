@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 22:44:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 00:19:03 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,25 @@ typedef struct	s_data
 }				t_data;
 
 //MAIN
-void	read_stdin(t_data *data);
+
 
 // ERROR
 void	check_input(int ac, char **av, t_data *data);
 void	handle_error(t_data *data, int type);
-int		is_here_doc(char *str);
+int		is_identical_str(char *str1, char *str2);
 
 // INIT
 void	init_data(int ac, char **av, char **env, t_data *data);
 t_files	open_files(char *filename_1, char *filename_2, t_data *data);
-int 	**create_pipes(int ac);
+int		**create_pipes(t_data *data);
 char	***handle_arguments(t_data *data, char **av);
 char	**get_all_paths(char **env);
 
 // INIT 2
 void	memory_allocation(t_data *data, char **av);
 void 	file_redirections(t_data *data);
+void	read_stdin(t_data *data);
+int		create_temp_file(t_data *data);
 
 //EXE
 void	init_execution(t_data *data);
@@ -107,6 +109,6 @@ int		**ft_malloc_mat_int(int x, int y, int size);
 void	ft_free_mat_int(int **mat, int size);
 void	free_all(t_data *data);
 void	ft_free(char *str);
-void	free_commands(char ***cmds, int size);
+void	ft_free_mat3_str(char ***mat, size_t size);
 
 #endif

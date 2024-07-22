@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/22 00:16:08 by marvin           ###   ########.fr        #
+#    Updated: 2024/07/23 00:10:49 by aolabarr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SRC_BONUS =	pipex_main_bonus.c \
 			pipex_init_bonus.c \
 			pipex_init_2_bonus.c \
 			pipex_error_bonus.c \
-			print.c \
 				
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 OBJS_BONUS = $(addprefix $(OBJ_BONUS_DIR)/,$(SRC_BONUS:.c=.o))
