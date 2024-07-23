@@ -41,3 +41,6 @@ que simula la siguiente sentencia en la terminal:
 ```
 cmd1 << EOF | cmd2 >> outfile
 ```
+## Recomendaciones
+ [manual de la función printf](https://man7.org/linux/man-pages/man3/printf.3.html).
+
