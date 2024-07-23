@@ -27,15 +27,17 @@ Esta ejecución simula la siguiente operación en la terminal:
 < infile cmd1 | cmd2 > outfile
 ```
 Por ejemplo:
-```bash
+```
 ./pipex infile "ls -l" "wc -l" outfile
 ./pipex infile "grep h" "wc -l" outfile
 ```
-La versión extendida que se compila con la regla *bonus* funciona de igual forma, puediendo concatenar mas de 2 comandos. Por otro lado la sintaxis para ejecutar de forma que la información de entrada venga de la entrada estandar se realiza de la sigueinte manera:
-```bash
+La versión extendida que se compila con la regla *bonus* funciona de igual forma, pudiendo concatenar mas de 2 comandos. Por otro lado la sintaxis para ejecutar de forma que la información de entrada venga de la entrada estandar se realiza de la siguinte manera:
+
+(_EOF se puede sustituir por cualquier palabra que haga de fin de lectura_)
+```
 ./pipex here_doc EOF "cmd1" "cmd2" outfile
 ```
 que simula la siguiente sentencia en la terminal:
-```bash
+```
 cmd1 << EOF | cmd2 >> outfile
 ```
