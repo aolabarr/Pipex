@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:30:14 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 00:10:09 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/23 02:12:27 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	handle_error(t_data *data, int type)
 
 int	is_identical_str(char *str1, char *str2)
 {
-	if (!(ft_strncmp(str1, str2, ft_strlen(str2))) 
+	if (!(ft_strncmp(str1, str2, ft_strlen(str2)))
 		|| ft_strlen(str1) == ft_strlen(str2))
 		return (1);
 	else

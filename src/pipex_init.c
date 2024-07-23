@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/21 23:58:09 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 17:11:55 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	***handle_arguments(t_data *data, char **av)
 	i = 0;
 	while (i < data->childs)
 	{
-		args[i] = ft_split(av[i + 2], SPACE);
+		args[i] = ft_shlex_split(av[i + 2], SPACE);
 		if (!args[i])
 		{
 			ft_free_mat3_str(args, i);

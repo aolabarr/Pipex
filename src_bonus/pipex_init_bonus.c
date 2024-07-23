@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 00:26:31 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:12:43 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ char	***handle_arguments(t_data *data, char **av)
 	while (i < data->childs)
 	{
 		if (data->hdoc == 0)
-			args[i] = ft_split(av[i + 2], SPACE);
+			args[i] = ft_shlex_split(av[i + 2], SPACE);
 		else if (data->hdoc == 1)
-			args[i] = ft_split(av[i + 3], SPACE);
+			args[i] = ft_shlex_split(av[i + 3], SPACE);
 		if (!args[i])
 		{
 			ft_free_mat3_str(args, i);

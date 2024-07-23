@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 13:24:29 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/20 14:03:24 by aolabarr         ###   ########.fr       */
+/*   Created: 2024/07/23 17:08:11 by aolabarr          #+#    #+#             */
+/*   Updated: 2024/07/23 17:11:12 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <float.h>
+//# include <float.h>
 
 # define MAXINT 2147483647
 # define MININT -2147483648
@@ -62,6 +62,8 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_strjoin_freed(char *s1, char const *s2);
 void	ft_free_mat_str(char **mat, size_t size);
 size_t	ft_matsize(char **str);
-int     ft_str_is_int(char *str);
-float   ft_atoi_float(const char *str);
+int		ft_str_is_int(char *str);
+float	ft_atoi_float(const char *str);
+char	**ft_shlex_split(char *s, char c);
+
 #endif

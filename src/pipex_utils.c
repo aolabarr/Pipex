@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:30:19 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/22 22:29:50 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/23 02:11:59 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,3 @@ void	ft_free_mat3_str(char ***mat, size_t size)
 	mat = NULL;
 	return ;
 }
-

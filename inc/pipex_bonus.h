@@ -6,13 +6,12 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 00:19:03 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:17:37 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
-
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -22,7 +21,7 @@
 
 # include "lib/libft/src/libft.h"
 # include "lib/libio/libio.h"
- 
+
 # define INPUT_ERROR_MESSAGE  	"Incorrect arguments\n"
 # define MALLOC_ERROR_MESSAGE	"Memory allocation error"
 # define OPEN_ERROR_MESSAGE     "Open error"
@@ -47,21 +46,19 @@
 # define OPEN_MODE 	0644
 # define RD_END		0
 # define WR_END		1
-# define SPACE		' '
-# define DOTS		':'
+# define SPACE		32
+# define DOTS		58
 # define SLASH		"/"
 # define PATH		"PATH="
 # define HERE_DOC	"here_doc"
 
-
-
-typedef struct	s_files
+typedef struct s_files
 {
-	int in;
-	int out;
+	int	in;
+	int	out;
 }				t_files;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	t_files	fd;
 	pid_t	*pid;
@@ -74,9 +71,6 @@ typedef struct	s_data
 	int		hdoc;
 	char	*limiter;
 }				t_data;
-
-//MAIN
-
 
 // ERROR
 void	check_input(int ac, char **av, t_data *data);
@@ -92,7 +86,7 @@ char	**get_all_paths(char **env);
 
 // INIT 2
 void	memory_allocation(t_data *data, char **av);
-void 	file_redirections(t_data *data);
+void	file_redirections(t_data *data);
 void	read_stdin(t_data *data);
 int		create_temp_file(t_data *data);
 
@@ -102,7 +96,6 @@ char	*get_path(char **paths, char *cmd);
 void	exe_child(t_data *data, char *pathname, int child);
 void	close_pipes(t_data *data);
 void	wait_childs(t_data *data);
-
 
 //UTILS
 int		**ft_malloc_mat_int(int x, int y, int size);

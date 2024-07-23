@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/22 01:35:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 17:17:12 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
-
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -22,7 +21,7 @@
 
 # include "lib/libft/src/libft.h"
 # include "lib/libio/libio.h"
- 
+
 # define INPUT_ERROR_MESSAGE  	"Incorrect arguments\n"
 # define MALLOC_ERROR_MESSAGE	"Memory allocation error"
 # define OPEN_ERROR_MESSAGE     "Open error"
@@ -48,36 +47,36 @@
 # define OPEN_MODE 	0644
 # define RD_END		0
 # define WR_END		1
-# define SPACE		' '
-# define DOTS		':'
+# define SPACE		32
+# define DOTS		58
 # define SLASH		"/"
 # define PATH		"PATH="
 
 // Errores comunes del bash
-#define EXIT_FILE_NOT_FOUND 1
-#define EXIT_INVALID_ARGUMENT 2
-#define EXIT_PERMISSION_DENIED 13
-#define EXIT_CANNOT_EXECUTE 126
-#define COMMAND_NOT_FOUND 127
+# define EXIT_FILE_NOT_FOUND 1
+# define EXIT_INVALID_ARGUMENT 2
+# define EXIT_PERMISSION_DENIED 13
+# define EXIT_CANNOT_EXECUTE 126
+# define COMMAND_NOT_FOUND 127
 
-#define EXIT_OUT_OF_MEMORY 12 // Memoria insuficiente
-#define EXIT_IO_ERROR 5       // Error de entrada/salida
-#define EXIT_DEVICE_NOT_FOUND 6 // Dispositivo no encontrado
-#define EXIT_TIMEOUT 124       // Tiempo de espera agotado
-#define EXIT_CONFLICT 409      // Conflicto de recursos
-#define EXIT_UNAVAILABLE 503   // Servicio no disponible
-#define EXIT_UNSUPPORTED 415   // Operación no soportada
-#define EXIT_DATA_CORRUPTION 74 // Corrupción de datos
-#define EXIT_AUTH_FAILURE 401  // Fallo de autenticación
-#define EXIT_NETWORK_FAILURE 104 // Fallo de red
+# define EXIT_OUT_OF_MEMORY 12 // Memoria insuficiente
+# define EXIT_IO_ERROR 5       // Error de entrada/salida
+# define EXIT_DEVICE_NOT_FOUND 6 // Dispositivo no encontrado
+# define EXIT_TIMEOUT 124       // Tiempo de espera agotado
+# define EXIT_CONFLICT 409      // Conflicto de recursos
+# define EXIT_UNAVAILABLE 503   // Servicio no disponible
+# define EXIT_UNSUPPORTED 415   // Operación no soportada
+# define EXIT_DATA_CORRUPTION 74 // Corrupción de datos
+# define EXIT_AUTH_FAILURE 401  // Fallo de autenticación
+# define EXIT_NETWORK_FAILURE 104 // Fallo de red
 
-typedef struct	s_files
+typedef struct s_files
 {
-	int in;
-	int out;
+	int	in;
+	int	out;
 }				t_files;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	t_files	fd;
 	pid_t	*pid;
@@ -88,8 +87,6 @@ typedef struct	s_data
 	char	**all_paths;
 	char	**paths;
 }				t_data;
-
-//MAIN
 
 // ERROR
 void	handle_error(t_data *data, int type);
@@ -103,7 +100,7 @@ int		**create_pipes(t_data *data);
 
 // INIT 2
 void	memory_allocation(t_data *data);
-void 	file_redirections(t_data *data);
+void	file_redirections(t_data *data);
 
 //EXE
 void	init_execution(t_data *data);
@@ -111,7 +108,6 @@ char	*get_path(char **paths, char *cmd);
 void	exe_child(t_data *data, char *pathname, int child);
 void	close_pipes(t_data *data);
 void	wait_childs(t_data *data);
-
 
 //UTILS
 int		**ft_malloc_mat_int(int x, int y, int size);
