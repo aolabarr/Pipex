@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:08:11 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 17:11:12 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:39:35 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-//# include <float.h>
+
+typedef struct s_quote
+{
+	int		in;
+	char	is;	
+}			t_quote;
 
 # define MAXINT 2147483647
 # define MININT -2147483648

@@ -6,17 +6,11 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 00:48:20 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 17:04:37 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:39:44 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-typedef struct s_quote
-{
-	int		in;
-	char	is;	
-}			t_quote;
 
 static size_t	ft_word_count(char *s, char c);
 static size_t	ft_char_count(char *s, char c, t_quote quote);

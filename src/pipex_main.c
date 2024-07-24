@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:39:29 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 16:14:04 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:44:36 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 5)
 		handle_error(&data, INPUT);
+	check_input(ac, av, &data);
 	init_data(ac, av, env, &data);
 	init_execution(&data);
 	close(data.fd.in);
@@ -26,26 +27,6 @@ int	main(int ac, char **av, char **env)
 	return (0);
 }
 
-void	handle_error(t_data *data, int type)
-{
-	if (type == INPUT)
-		ft_putstr_fd(INPUT_ERROR_MESSAGE, STDOUT_FILENO);
-	else if (type == MALLOC)
-		perror(MALLOC_ERROR_MESSAGE);
-	else if (type == OPEN)
-		perror(OPEN_ERROR_MESSAGE);
-	else if (type == FORK)
-		perror(FORK_ERROR_MESSAGE);
-	else if (type == EXECVE)
-		perror(EXECVE_ERROR_MESSAGE);
-	else if (type == PIPE)
-		perror(PIPE_ERROR_MESSAGE);
-	else if (type == CMD)
-		perror(CMD_ERROR_MESSAGE);
-	free_all(data);
-	exit(EXIT_FAILURE);
-	return ;
-}
 
 void	memory_allocation(t_data *data)
 {

@@ -6,7 +6,7 @@
 #    By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 09:34:43 by aolabarr          #+#    #+#              #
-#    Updated: 2024/07/23 00:10:49 by aolabarr         ###   ########.fr        #
+#    Updated: 2024/07/24 19:28:24 by aolabarr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC =	pipex_main.c \
 		pipex_utils.c \
 		pipex_exe.c \
 		pipex_init.c \
+		pipex_error.c \
 
 SRC_BONUS =	pipex_main_bonus.c \
 			pipex_utils_bonus.c \

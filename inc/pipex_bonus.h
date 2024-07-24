@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 17:17:37 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:04:06 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@
 # define FORK	5
 # define EXECVE	6
 # define WAIT	7
-# define UNLINK	8
+# define CMD	8
+# define UNLINK	9
+
 # define ERROR	-1
 # define ACCESS	0
 
@@ -51,6 +53,16 @@
 # define SLASH		"/"
 # define PATH		"PATH="
 # define HERE_DOC	"here_doc"
+
+// Errores comunes del bash
+# define FILE_NOT_FOUND		1
+# define INVALID_ARGUMENT	2
+# define PIPE_ERROR			141
+# define CANNOT_EXECUTE		126
+# define COMMAND_NOT_FOUND	127
+# define OUT_OF_MEMORY		12
+# define FORK_ERROR 		11
+# define WAIT_ERROR 		10
 
 typedef struct s_files
 {
@@ -75,6 +87,7 @@ typedef struct s_data
 // ERROR
 void	check_input(int ac, char **av, t_data *data);
 void	handle_error(t_data *data, int type);
+void	handle_exit(int type);
 int		is_identical_str(char *str1, char *str2);
 
 // INIT

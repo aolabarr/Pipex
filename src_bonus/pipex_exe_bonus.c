@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:10:51 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 00:24:07 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:52:18 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	init_execution(t_data *data)
 	while (i < data->childs)
 	{
 		pathname = get_path(data->all_paths, data->cmds[i][0]);
+		if (!pathname)
+			handle_error(data, CMD);
 		data->pid[i] = fork();
 		if (data->pid[i] == ERROR)
 			handle_error(data, FORK);

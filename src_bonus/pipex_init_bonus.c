@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 17:12:43 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:36:41 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_files	open_files(char *filename_1, char *filename_2, t_data *data)
 		fd.in = open(HERE_DOC, O_RDONLY);
 	if (fd.in == ERROR)
 		handle_error(data, OPEN);
-	fd.out = open(filename_2, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (data->hdoc == 0)
+		fd.out = open(filename_2, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	else if (data->hdoc == 1)
+		fd.out = open(filename_2, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd.out == ERROR)
 		handle_error(data, OPEN);
 	return (fd);

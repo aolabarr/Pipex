@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_error_bonus.c                                :+:      :+:    :+:   */
+/*   pipex_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 16:30:14 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/24 19:34:23 by aolabarr         ###   ########.fr       */
+/*   Created: 2024/07/24 19:21:50 by aolabarr          #+#    #+#             */
+/*   Updated: 2024/07/24 19:58:35 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/pipex_bonus.h"
+#include "inc/pipex.h"
 
 void	check_input(int ac, char **av, t_data *data)
 {
 	size_t	i;
-	
-	if (ac < MIN_AC)
+
+	if (ac != 5)
 		handle_error(data, INPUT);
-	data->hdoc = is_identical_str(av[1], HERE_DOC);
-	if (data->hdoc == 1 && ac < MIN_AC + 1)
-		handle_error(data, INPUT);
-	i = 0;
-	while (i < ft_matsize(av))
+	i = 2;
+	while (i < ft_matsize(av) - 1)
 	{
 		if (av[i] == NULL || av[i][0] == '\0')
-			handle_error(data, INPUT);
+			handle_error(data, PERMISSION);
 		i++;
 	}
 	return ;
@@ -34,7 +31,7 @@ void	check_input(int ac, char **av, t_data *data)
 void	handle_error(t_data *data, int type)
 {
 	if (type == INPUT)
-		ft_putstr_fd(INPUT_ERROR_MESSAGE, STDOUT_FILENO);
+		ft_putendl_fd(INPUT_ERROR_MESSAGE, STDOUT_FILENO);
 	else if (type == MALLOC)
 		perror(MALLOC_ERROR_MESSAGE);
 	else if (type == OPEN)
@@ -45,9 +42,13 @@ void	handle_error(t_data *data, int type)
 		perror(EXECVE_ERROR_MESSAGE);
 	else if (type == PIPE)
 		perror(PIPE_ERROR_MESSAGE);
-	else if (type == UNLINK)
-		perror(UNLINK_ERROR_MESSAGE);
-	if (type != INPUT)
+	else if (type == WAIT)
+		perror(WAIT_ERROR_MESSAGE);
+	else if (type == COMMAND)
+		perror(CMD_ERROR_MESSAGE);
+	else if (type == PERMISSION)
+		ft_putendl_fd(PERMISSION_ERROR_MESSAGE, STDOUT_FILENO);
+	if (!(type == INPUT || type == PERMISSION))
 		free_all(data);
 	handle_exit(type);
 	return ;
@@ -69,17 +70,8 @@ void	handle_exit(int type)
 		exit(PIPE_ERROR);
 	else if (type == WAIT)
 		exit(WAIT_ERROR);
-	else if (type == CMD)
+	else if (type == COMMAND)
 		exit(COMMAND_NOT_FOUND);
 	exit(EXIT_FAILURE);
 	return ;
-}
-
-int	is_identical_str(char *str1, char *str2)
-{
-	if (!(ft_strncmp(str1, str2, ft_strlen(str2)))
-		&& ft_strlen(str1) == ft_strlen(str2))
-		return (1);
-	else
-		return (0);
 }
