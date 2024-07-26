@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:21:50 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/26 11:19:27 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:50:22 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	check_input(int ac, char **av, t_data *data)
 	{
 		if (av[i] == NULL || av[i][0] == '\0')
 			handle_error(data, PERMISSION);
+		if (str_is_space(av[i]))
+			handle_error(data, INPUT);
 		i++;
 	}
 	return ;
@@ -74,4 +76,18 @@ void	handle_exit(int type)
 		exit(COMMAND_NOT_FOUND);
 	exit(EXIT_FAILURE);
 	return ;
+}
+
+int	str_is_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != SPACE)
+			return (0);
+		i++;
+	}
+	return (1);
 }

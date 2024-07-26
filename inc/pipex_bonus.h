@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/26 11:18:39 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:37:44 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define FORK_ERROR_MESSAGE			"Child process creation error"
 # define EXECVE_ERROR_MESSAGE		"EXCVE execution error"
 # define WAIT_ERROR_MESSAGE			"Wait error"
+# define COMMAND_ERROR_MESSAGE		"Command no found"
 # define UNLINK_ERROR_MESSAGE		"Unlink error"
 # define PERMISSION_ERROR_MESSAGE	"Permission denied"
 
@@ -39,7 +40,7 @@
 # define FORK		5
 # define EXECVE		6
 # define WAIT		7
-# define CMD		8
+# define COMMAND	8
 # define PERMISSION	9
 # define UNLINK		10
 
@@ -90,6 +91,7 @@ void	check_input(int ac, char **av, t_data *data);
 void	handle_error(t_data *data, int type);
 void	handle_exit(int type);
 int		is_identical_str(char *str1, char *str2);
+int		str_is_space(char *str);
 
 // INIT
 void	init_data(int ac, char **av, char **env, t_data *data);

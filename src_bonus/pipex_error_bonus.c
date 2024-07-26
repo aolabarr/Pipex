@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:30:14 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/26 11:20:04 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:49:14 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	check_input(int ac, char **av, t_data *data)
 	{
 		if (av[i] == NULL || av[i][0] == '\0')
 			handle_error(data, PERMISSION);
+		if (str_is_space(av[i]))
+			handle_error(data, INPUT);
 		i++;
 	}
 	return ;
@@ -45,6 +47,8 @@ void	handle_error(t_data *data, int type)
 		perror(EXECVE_ERROR_MESSAGE);
 	else if (type == PIPE)
 		perror(PIPE_ERROR_MESSAGE);
+	else if (type == COMMAND)
+		perror(COMMAND_ERROR_MESSAGE);
 	else if (type == UNLINK)
 		perror(UNLINK_ERROR_MESSAGE);
 	else if (type == PERMISSION)
@@ -71,7 +75,7 @@ void	handle_exit(int type)
 		exit(PIPE_ERROR);
 	else if (type == WAIT)
 		exit(WAIT_ERROR);
-	else if (type == CMD)
+	else if (type == COMMAND)
 		exit(COMMAND_NOT_FOUND);
 	exit(EXIT_FAILURE);
 	return ;
@@ -84,4 +88,18 @@ int	is_identical_str(char *str1, char *str2)
 		return (1);
 	else
 		return (0);
+}
+
+int	str_is_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != SPACE)
+			return (0);
+		i++;
+	}
+	return (1);
 }

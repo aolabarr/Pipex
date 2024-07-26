@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/26 10:20:55 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:28:29 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,14 @@ typedef struct s_data
 }				t_data;
 
 // MAIN
-void	handle_error(t_data *data, int type);
-void	handle_exit(int type);
 void	memory_allocation(t_data *data);
 void	file_redirections(t_data *data);
 
 //ERROR
 void	check_input(int ac, char **av, t_data *data);
+void	handle_error(t_data *data, int type);
+void	handle_exit(int type);
+int		str_is_space(char *str);
 
 // INIT
 void	init_data(int ac, char **av, char **env, t_data *data);
