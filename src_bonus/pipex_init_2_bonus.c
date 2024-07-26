@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:11:56 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 00:37:16 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:20:14 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ void	memory_allocation(t_data *data, char **av)
 		handle_error(data, MALLOC);
 	data->paths[data->childs] = NULL;
 	if (data->hdoc == 1)
+	{
 		data->limiter = ft_strdup(av[2]);
+		if (!data->limiter)
+			handle_error(data, MALLOC);
+	}
 	else
 		data->limiter = NULL;
 	return ;
@@ -47,7 +51,7 @@ void	read_stdin(t_data *data)
 	fd = create_temp_file(data);
 	limit = ft_strjoin(data->limiter, "\n");
 	buffer = ft_strdup("");
-	if (!buffer)
+	if (!buffer || !limit)
 		handle_error(data, MALLOC);
 	while (buffer)
 	{

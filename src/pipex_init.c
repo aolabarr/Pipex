@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/23 17:11:55 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:48:27 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	**create_pipes(t_data *data)
 	i = 0;
 	pipes = ft_malloc_mat_int(data->childs - 1, 2, sizeof(int));
 	if (!pipes)
-		handle_error(data, PIPE);
+		handle_error(data, MALLOC);
 	while (i < data->childs - 1)
 	{
 		if (pipe(pipes[i]) == ERROR)
@@ -83,6 +83,8 @@ char	**get_all_paths(char **env, t_data *data)
 	int		get;
 	char	**paths;
 
+	if (!env)
+		return (NULL);
 	i = 0;
 	get = 0;
 	while (i < ft_matsize(env) && get == 0)

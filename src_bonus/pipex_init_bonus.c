@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:11:46 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/24 19:36:41 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:40:57 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ char	**get_all_paths(char **env)
 	int		get;
 	char	**paths;
 
+	if (!env)
+		return (NULL);
 	i = 0;
 	get = 0;
 	while (i < ft_matsize(env) && get == 0)

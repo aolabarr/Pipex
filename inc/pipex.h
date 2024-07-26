@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/24 19:52:46 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:20:55 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define FORK_ERROR_MESSAGE			"Child process creation error"
 # define EXECVE_ERROR_MESSAGE		"EXCVE execution error"
 # define WAIT_ERROR_MESSAGE			"Wait error"
-# define UNLINK_ERROR_MESSAGE		"Unlink error"
 # define CMD_ERROR_MESSAGE			"Command no found"
 # define PERMISSION_ERROR_MESSAGE	"Permission denied"
 
@@ -43,18 +42,6 @@
 # define COMMAND	8
 # define PERMISSION	9
 
-# define ERROR	-1
-# define ACCESS	0
-
-# define OPEN_MODE 	0644
-# define RD_END		0
-# define WR_END		1
-# define SPACE		32
-# define DOTS		58
-# define SLASH		"/"
-# define PATH		"PATH="
-
-// Errores comunes del bash
 # define FILE_NOT_FOUND		1
 # define INVALID_ARGUMENT	2
 # define PIPE_ERROR			141
@@ -63,6 +50,17 @@
 # define OUT_OF_MEMORY		12
 # define FORK_ERROR 		11
 # define WAIT_ERROR 		10
+
+# define ERROR		-1
+# define ACCESS		0
+
+# define OPEN_MODE 	0644
+# define RD_END		0
+# define WR_END		1
+# define SPACE		32
+# define DOTS		58
+# define SLASH		"/"
+# define PATH		"PATH="
 
 typedef struct s_files
 {

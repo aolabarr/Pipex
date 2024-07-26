@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:38:45 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/24 15:04:06 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:18:39 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,38 @@
 # include "lib/libft/src/libft.h"
 # include "lib/libio/libio.h"
 
-# define INPUT_ERROR_MESSAGE  	"Incorrect arguments\n"
-# define MALLOC_ERROR_MESSAGE	"Memory allocation error"
-# define OPEN_ERROR_MESSAGE     "Open error"
-# define PIPE_ERROR_MESSAGE		"Pipe error"
-# define FORK_ERROR_MESSAGE		"Child process creation error"
-# define EXECVE_ERROR_MESSAGE	"EXCVE execution error"
-# define WAIT_ERROR_MESSAGE		"Wait error"
-# define UNLINK_ERROR_MESSAGE	"Unlink error"
+# define INPUT_ERROR_MESSAGE  		"Incorrect arguments\n"
+# define MALLOC_ERROR_MESSAGE		"Memory allocation error"
+# define OPEN_ERROR_MESSAGE     	"Open error"
+# define PIPE_ERROR_MESSAGE			"Pipe error"
+# define FORK_ERROR_MESSAGE			"Child process creation error"
+# define EXECVE_ERROR_MESSAGE		"EXCVE execution error"
+# define WAIT_ERROR_MESSAGE			"Wait error"
+# define UNLINK_ERROR_MESSAGE		"Unlink error"
+# define PERMISSION_ERROR_MESSAGE	"Permission denied"
 
-# define INPUT	1
-# define MALLOC	2
-# define OPEN	3
-# define PIPE	4
-# define FORK	5
-# define EXECVE	6
-# define WAIT	7
-# define CMD	8
-# define UNLINK	9
+# define INPUT		1
+# define MALLOC		2
+# define OPEN		3
+# define PIPE		4
+# define FORK		5
+# define EXECVE		6
+# define WAIT		7
+# define CMD		8
+# define PERMISSION	9
+# define UNLINK		10
 
-# define ERROR	-1
-# define ACCESS	0
+# define FILE_NOT_FOUND		1
+# define INVALID_ARGUMENT	2
+# define PIPE_ERROR			141
+# define CANNOT_EXECUTE		126
+# define COMMAND_NOT_FOUND	127
+# define OUT_OF_MEMORY		12
+# define FORK_ERROR 		11
+# define WAIT_ERROR 		10
+
+# define ERROR		-1
+# define ACCESS		0
 
 # define MIN_AC		5
 # define OPEN_MODE 	0644
@@ -53,16 +64,6 @@
 # define SLASH		"/"
 # define PATH		"PATH="
 # define HERE_DOC	"here_doc"
-
-// Errores comunes del bash
-# define FILE_NOT_FOUND		1
-# define INVALID_ARGUMENT	2
-# define PIPE_ERROR			141
-# define CANNOT_EXECUTE		126
-# define COMMAND_NOT_FOUND	127
-# define OUT_OF_MEMORY		12
-# define FORK_ERROR 		11
-# define WAIT_ERROR 		10
 
 typedef struct s_files
 {

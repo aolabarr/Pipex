@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:39:29 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/24 19:44:36 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:19:13 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_data	data;
 
-	if (ac != 5)
-		handle_error(&data, INPUT);
 	check_input(ac, av, &data);
 	init_data(ac, av, env, &data);
 	init_execution(&data);
@@ -26,7 +24,6 @@ int	main(int ac, char **av, char **env)
 	free_all(&data);
 	return (0);
 }
-
 
 void	memory_allocation(t_data *data)
 {

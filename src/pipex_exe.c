@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:10:51 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/24 19:53:06 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:49:01 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*get_path(char **all_paths, char *cmd)
 	char	*pathname;
 	size_t	i;
 
+	if (!all_paths)
+		return (NULL);
 	i = 0;
 	while (i < ft_matsize(all_paths))
 	{

@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:30:14 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/24 19:34:23 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:20:04 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	check_input(int ac, char **av, t_data *data)
 {
 	size_t	i;
-	
+
 	if (ac < MIN_AC)
 		handle_error(data, INPUT);
 	data->hdoc = is_identical_str(av[1], HERE_DOC);
 	if (data->hdoc == 1 && ac < MIN_AC + 1)
 		handle_error(data, INPUT);
-	i = 0;
-	while (i < ft_matsize(av))
+	i = 2;
+	while (i < ft_matsize(av) - 1)
 	{
 		if (av[i] == NULL || av[i][0] == '\0')
-			handle_error(data, INPUT);
+			handle_error(data, PERMISSION);
 		i++;
 	}
 	return ;
@@ -34,7 +34,7 @@ void	check_input(int ac, char **av, t_data *data)
 void	handle_error(t_data *data, int type)
 {
 	if (type == INPUT)
-		ft_putstr_fd(INPUT_ERROR_MESSAGE, STDOUT_FILENO);
+		ft_putendl_fd(INPUT_ERROR_MESSAGE, STDOUT_FILENO);
 	else if (type == MALLOC)
 		perror(MALLOC_ERROR_MESSAGE);
 	else if (type == OPEN)
@@ -47,7 +47,9 @@ void	handle_error(t_data *data, int type)
 		perror(PIPE_ERROR_MESSAGE);
 	else if (type == UNLINK)
 		perror(UNLINK_ERROR_MESSAGE);
-	if (type != INPUT)
+	else if (type == PERMISSION)
+		ft_putendl_fd(PERMISSION_ERROR_MESSAGE, STDOUT_FILENO);
+	if (!(type == INPUT || type == PERMISSION))
 		free_all(data);
 	handle_exit(type);
 	return ;
