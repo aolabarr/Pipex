@@ -42,5 +42,5 @@ que simula la siguiente sentencia en la terminal:
 cmd1 << EOF | cmd2 >> outfile
 ```
 ## Recomendaciones
- [Post de rozmichelle.com](https://www.rozmichelle.com/pipes-forks-dups/)
+- Pipes, Forks & Dups: Understanding command execution and I/O data flow by ROSLYN MCCONNELL ([enlace](https://www.rozmichelle.com/pipes-forks-dups/))
 
