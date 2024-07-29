@@ -6,7 +6,7 @@
 /*   By: aolabarr <aolabarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:30:14 by aolabarr          #+#    #+#             */
-/*   Updated: 2024/07/26 18:04:39 by aolabarr         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:18:23 by aolabarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	str_is_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != ' ' || str[i] != '\t')
+		if (!(str[i] == ' ' || str[i] == '\t'))
 			return (0);
 		i++;
 	}
